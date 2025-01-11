@@ -2,16 +2,15 @@
 {
     public class Product
     {
-        private Guid Id { get; set; }
-        private string Name { get; set; }
-        private decimal Price { get; set; }
-        private string Description { get; set; }
-        private int Stock { get; set; }
-        private List<OrderItem> Items = new();
+        public long Id { get; private set; }
+        public string Name { get; private set; }
+        public decimal Price { get; private set; }
+        public string Description { get; private set; }
+        public int Stock { get; private set; }
+        public List<OrderItem> Items = [];
 
-        public Product(Guid id, string name, decimal price, string description, int stock)
+        public Product(string name, decimal price, string description, int stock)
         {
-            Id = id;
             Name = name;
             Price = price;
             Description = description;

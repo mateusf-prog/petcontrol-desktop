@@ -2,9 +2,9 @@
 {
     public class OrderItem
     {
-        private OrderItemPK Id = new();
-        private int Quantity;
-        private decimal Price;
+        public OrderItemPK Id = new();
+        public int Quantity { get; private set; }
+        public decimal Price { get; private set; }
 
         public OrderItem() { }
 

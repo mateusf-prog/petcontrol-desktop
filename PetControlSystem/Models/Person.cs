@@ -3,21 +3,19 @@ namespace PetControlSystem.Models
 {
     public class Person
     {
-        public string Name { get; set; }
-        public string Email { get; set; }
-        public string Phone { get; set; }
-        public string? Document { get; set; }
-        public DateTime BirthDate { get; set; }
+        public string Name { get; private set; }
+        public string Email { get; private set; }
+        public string Phone { get; private set; }
+        public string? Document { get; private set; }
 
         public Person() { }
 
-        public Person(string name, string email, string phone, string document, DateTime birthDate)
+        public Person(string name, string email, string phone, string document)
         {
             Name = name;
             Email = email;
             Phone = phone;
             Document = document;
-            BirthDate = birthDate;
         }
     }
 }

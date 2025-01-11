@@ -5,15 +5,14 @@ namespace PetControlSystem.Models
 {
     public class Pet
     {
-        private readonly Guid Id;
-        private readonly string? Name;
-        private readonly AnimalType Type;
+        public long Id { get; private set; }
+        public string? Name { get; private set; }
+        public AnimalType Type { get; private set; }
 
         public Pet() { }
 
-        public Pet(Guid id, string name, AnimalType type)
+        public Pet(string name, AnimalType type)
         {
-            Id = id;
             Name = name;
             Type = type;
         }

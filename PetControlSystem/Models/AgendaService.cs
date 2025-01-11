@@ -1,6 +1,4 @@
-﻿using PetControlSystem.Services;
-
-namespace PetControlSystem.Models
+﻿namespace PetControlSystem.Models
 {
     public class AgendaService
     {

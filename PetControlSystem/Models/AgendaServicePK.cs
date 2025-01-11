@@ -1,10 +1,10 @@
-﻿using PetControlSystem.Models;
-
-namespace PetControlSystem.Services
+﻿namespace PetControlSystem.Models
 {
     public class AgendaServicePK
     {
-        public Agenda? Appointment { get; set; }
-        public Service? Service { get; set; }
+        public Agenda Appointment { get; set; }
+        public Service Service { get; set; }
+
+        public AgendaServicePK() { }
     }
 }
