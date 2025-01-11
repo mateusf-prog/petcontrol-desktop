@@ -2,18 +2,23 @@
 {
     public class OrderItem
     {
-        public OrderItemPK Id = new();
+        public OrderItemPK Id { get; set; } = new();
         public int Quantity { get; private set; }
         public decimal Price { get; private set; }
 
         public OrderItem() { }
 
         public OrderItem(Order order, Product product, int quantity, decimal price)
+            : this(order, product)
+        {
+            Quantity = quantity;
+            Price = price;
+        }
+
+        public OrderItem(Order order, Product product)
         {
             Id.Order = order;
             Id.Product = product;
-            Quantity = quantity;
-            Price = price;
         }
 
         public Product GetProduct()

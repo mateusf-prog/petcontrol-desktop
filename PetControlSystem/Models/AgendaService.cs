@@ -2,32 +2,32 @@
 {
     public class AgendaService
     {
-        public AgendaServicePK id;
+        public AgendaServicePK Id { get; set; } = new();
 
         public AgendaService(Agenda appointment, Service service)
         {
-            id.Service = service;
-            id.Appointment = appointment;
+            Id.Appointment = appointment;
+            Id.Service = service;
         }
 
         public Service GetService()
         {
-            return id.Service;
+            return Id.Service;
         }
 
         public void SetService(Service service)
         {
-            id.Service = service;
+            Id.Service = service;
         }
 
         public Agenda GetAppointment()
         {
-            return id.Appointment;
+            return Id.Appointment;
         }
 
         public void SetAppointment(Agenda appointment)
         {
-            id.Appointment = appointment;
+            Id.Appointment = appointment;
         }
     }
 }
