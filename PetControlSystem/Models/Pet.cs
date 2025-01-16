@@ -7,6 +7,7 @@ namespace PetControlSystem.Models
     {
         public long Id { get; private set; }
         public string? Name { get; private set; }
+        public long CustomerId { get; private set; }
         public Customer Customer { get; private set; }
         public AnimalType Type { get; private set; }
 

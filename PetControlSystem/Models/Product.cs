@@ -7,7 +7,7 @@
         public decimal Price { get; private set; }
         public string Description { get; private set; }
         public int Stock { get; private set; }
-        public List<OrderItem> Items = [];
+        public ICollection<Order> Orders { get; set; }
 
         public Product(string name, decimal price, string description, int stock)
         {
@@ -15,11 +15,6 @@
             Price = price;
             Description = description;
             Stock = stock;
-        }
-
-        public List<Order> GetOrders()
-        {
-            return Items.Select(item => item.GetOrder()).ToList();
         }
     }
 }
