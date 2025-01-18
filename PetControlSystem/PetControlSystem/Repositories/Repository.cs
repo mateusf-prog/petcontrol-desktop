@@ -6,6 +6,13 @@ namespace PetControlSystem.Repositories
 {
     public class Repository : DbContext
     {
+        private readonly IConfiguration _configuration;
+
+        public Repository(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
+
         public DbSet<Product> Products { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<Customer> Customers { get; set; }
@@ -16,7 +23,7 @@ namespace PetControlSystem.Repositories
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            var connectionString = ConfigurationManager.ConnectionStrings["PetControlContext"].ConnectionString;
+            var connectionString = _configuration.GetConnectionString("PetControlContext");
             optionsBuilder.UseNpgsql(connectionString);
         }
 
@@ -42,8 +49,8 @@ namespace PetControlSystem.Repositories
 
             // One-to-many: Customer and Pet
             modelBuilder.Entity<Pet>()
-                .HasOne(p => p.Customer) 
-                .WithMany(c => c.Pets)   
+                .HasOne(p => p.Customer)
+                .WithMany(c => c.Pets)
                 .HasForeignKey(p => p.CustomerId);
 
             // One-to-many: Customer and Agenda
