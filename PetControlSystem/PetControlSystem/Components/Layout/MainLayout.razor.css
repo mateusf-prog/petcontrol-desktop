@@ -1,51 +1,61 @@
+/* Define a estrutura da página principal */
 .page {
     position: relative;
     display: flex;
     flex-direction: column;
 }
 
+/* Define o estilo principal do conteúdo */
 main {
     flex: 1;
 }
 
+/* Define o estilo da barra lateral */
 .sidebar {
-    background-image: linear-gradient(180deg, #a86939 100%, #ba723c 100%);
+    background-image: linear-gradient(#80573a, #80573a 100%);
 }
 
+/* Define o estilo da barra superior */
 .top-row {
-    background-color: #f7f7f7;
+    background-color: #333333;
     border-bottom: 1px solid #d6d5d5;
     justify-content: flex-end;
     height: 3.5rem;
     display: flex;
     align-items: center;
+    color: white
 }
 
+    /* Estilo para links e botões na barra superior */
     .top-row ::deep a, .top-row ::deep .btn-link {
         white-space: nowrap;
         margin-left: 1.5rem;
         text-decoration: none;
     }
 
-    .top-row ::deep a:hover, .top-row ::deep .btn-link:hover {
-        text-decoration: underline;
-    }
+        /* Estilo para links e botões na barra superior ao passar o mouse */
+        .top-row ::deep a:hover, .top-row ::deep .btn-link:hover {
+            text-decoration: underline;
+        }
 
-    .top-row ::deep a:first-child {
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
+        /* Estilo para o primeiro link na barra superior */
+        .top-row ::deep a:first-child {
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
 
+/* Estilos para telas com largura máxima de 640.98px */
 @media (max-width: 640.98px) {
     .top-row {
         justify-content: space-between;
     }
 
-    .top-row ::deep a, .top-row ::deep .btn-link {
-        margin-left: 0;
-    }
+        .top-row ::deep a, .top-row ::deep .btn-link {
+            margin-left: 0;
+        }
 }
 
+/* Estilos para telas com largura mínima de 641px */
 @media (min-width: 641px) {
     .page {
         flex-direction: row;
@@ -64,11 +74,11 @@ main {
         z-index: 1;
     }
 
-    .top-row.auth ::deep a:first-child {
-        flex: 1;
-        text-align: right;
-        width: 0;
-    }
+        .top-row.auth ::deep a:first-child {
+            flex: 1;
+            text-align: right;
+            width: 0;
+        }
 
     .top-row, article {
         padding-left: 2rem !important;
@@ -76,6 +86,7 @@ main {
     }
 }
 
+/* Estilo para a interface de erro do Blazor */
 #blazor-error-ui {
     background: lightyellow;
     bottom: 0;
@@ -88,6 +99,7 @@ main {
     z-index: 1000;
 }
 
+    /* Estilo para o botão de fechar na interface de erro do Blazor */
     #blazor-error-ui .dismiss {
         cursor: pointer;
         position: absolute;
