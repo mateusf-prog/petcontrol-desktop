@@ -1,11 +1,12 @@
 ﻿namespace PetControlSystem.Services.Interfaces
 {
-    public interface ICrud
+    public interface ICrud<T>
     {
         void Delete(string id);
-        Object Update(string id, Object obj);
-        Object Create(Object obj);
-        Object Read(string id);
-        List<Object> ReadAll();
+        T Update(string id, T obj);
+        T Create(T obj);
+        T Read(string id);
+        List<T> ReadAll();
     }
 }
+
