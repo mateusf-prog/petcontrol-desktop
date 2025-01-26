@@ -1,3 +1,4 @@
+using Asp.Versioning;
 using PetControlSystem.Components;
 using PetControlSystem.Models;
 using PetControlSystem.Services;
@@ -9,6 +10,16 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents()
     .AddInteractiveWebAssemblyComponents();
+
+builder.Services.AddApiVersioning(options =>
+{
+    options.DefaultApiVersion = new ApiVersion(1);
+    options.ReportApiVersions = true;
+    options.AssumeDefaultVersionWhenUnspecified = true;
+    options.ApiVersionReader = ApiVersionReader.Combine(
+        new UrlSegmentApiVersionReader(),
+        new HeaderApiVersionReader("X-Api-Version"));
+});
 
 builder.Services.AddScoped<IAgenda, AgendaService>();
 builder.Services.AddScoped<IPetSupport, PetSupportService>();
