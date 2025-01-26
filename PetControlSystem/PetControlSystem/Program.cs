@@ -1,5 +1,7 @@
-using PetControlSystem.Client.Pages;
 using PetControlSystem.Components;
+using PetControlSystem.Models;
+using PetControlSystem.Services;
+using PetControlSystem.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,6 +9,15 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents()
     .AddInteractiveWebAssemblyComponents();
+
+builder.Services.AddScoped<IAgenda, AgendaService>();
+builder.Services.AddScoped<IPetSupport, PetSupportService>();
+builder.Services.AddScoped<IUser, UserService>();
+builder.Services.AddScoped<IPet, PetService>();
+builder.Services.AddScoped<IProduct, ProductService>();
+builder.Services.AddScoped<IOrder, OrderService>();
+builder.Services.AddScoped<ICustomer, CustomerService>();
+
 
 var app = builder.Build();
 
