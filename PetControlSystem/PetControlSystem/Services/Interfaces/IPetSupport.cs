@@ -2,7 +2,7 @@
 
 namespace PetControlSystem.Services.Interfaces
 {
-    public interface IProduct : ICrud<Product>
+    public interface IPetSupport : ICrud<PetSupportService>
     {
     }
 }

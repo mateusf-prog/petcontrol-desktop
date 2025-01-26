@@ -1,6 +1,8 @@
-﻿namespace PetControlSystem.Services.Interfaces
+﻿using PetControlSystem.Models;
+
+namespace PetControlSystem.Services.Interfaces
 {
-    public interface ICustomer : ICrud
+    public interface ICustomer : ICrud<Customer>
     {
     }
 }

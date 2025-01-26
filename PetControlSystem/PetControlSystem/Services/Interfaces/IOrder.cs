@@ -1,6 +1,8 @@
-﻿namespace PetControlSystem.Services.Interfaces
+﻿using PetControlSystem.Models;
+
+namespace PetControlSystem.Services.Interfaces
 {
-    public interface IOrder : ICrud
+    public interface IOrder : ICrud<Order>
     {
     }
 }
