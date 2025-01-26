@@ -18,7 +18,7 @@ namespace PetControlSystem.Repositories
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Pet> Pets { get; set; }
         public DbSet<Agenda> Agendas { get; set; }
-        public DbSet<Service> Services { get; set; }
+        public DbSet<PetService> Services { get; set; }
         public DbSet<User> Users { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -44,7 +44,7 @@ namespace PetControlSystem.Repositories
                 .WithMany(s => s.Appointments)
                 .UsingEntity<Dictionary<string, object>>(
                     "AgendaService",
-                    a => a.HasOne<Service>().WithMany().HasForeignKey("ServiceId"),
+                    a => a.HasOne<PetService>().WithMany().HasForeignKey("ServiceId"),
                     a => a.HasOne<Agenda>().WithMany().HasForeignKey("AgendaId"));
 
             // One-to-many: Customer and Pet

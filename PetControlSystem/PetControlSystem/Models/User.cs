@@ -4,7 +4,6 @@ namespace PetControlSystem.Models
     public class User : Person
     {
         public long Id { get; private set; }
-        public string? Name { get; private set; }
         public string? Password { get; private set; }
         public Address Address { get; private set; }
 
