@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using PetControlSystem.Repositories;
@@ -11,9 +12,11 @@ using PetControlSystem.Repositories;
 namespace PetControlSystem.Migrations
 {
     [DbContext(typeof(Repository))]
-    partial class RepositoryModelSnapshot : ModelSnapshot
+    [Migration("20250127215151_adjustsAddressObject")]
+    partial class adjustsAddressObject
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -54,12 +57,6 @@ namespace PetControlSystem.Migrations
 
             modelBuilder.Entity("PetControlSystem.Models.Address", b =>
                 {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
-
                     b.Property<string>("City")
                         .HasColumnType("text");
 
@@ -77,8 +74,6 @@ namespace PetControlSystem.Migrations
 
                     b.Property<string>("ZipCode")
                         .HasColumnType("text");
-
-                    b.HasKey("Id");
 
                     b.ToTable("Address");
                 });
@@ -237,9 +232,6 @@ namespace PetControlSystem.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
-                    b.Property<long>("AddressId")
-                        .HasColumnType("bigint");
-
                     b.Property<string>("Document")
                         .HasColumnType("text");
 
@@ -259,8 +251,6 @@ namespace PetControlSystem.Migrations
                         .HasColumnType("text");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("AddressId");
 
                     b.ToTable("Users");
                 });
@@ -326,17 +316,6 @@ namespace PetControlSystem.Migrations
                         .IsRequired();
 
                     b.Navigation("Customer");
-                });
-
-            modelBuilder.Entity("PetControlSystem.Models.User", b =>
-                {
-                    b.HasOne("PetControlSystem.Models.Address", "Address")
-                        .WithMany()
-                        .HasForeignKey("AddressId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Address");
                 });
 
             modelBuilder.Entity("PetControlSystem.Models.Customer", b =>

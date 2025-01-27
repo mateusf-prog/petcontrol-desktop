@@ -1,13 +1,15 @@
 using Asp.Versioning;
-using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using PetControlSystem.Components;
+using PetControlSystem.Models;
 using PetControlSystem.Repositories;
 using PetControlSystem.Services;
 using PetControlSystem.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents()
     .AddInteractiveWebAssemblyComponents();
@@ -15,10 +17,6 @@ builder.Services.AddControllers();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
-WebAssemblyHostBuilder.CreateDefault(args);
-builder.Services.AddDbContext<Repository>(options =>
-    options.UseNpgsql(builder.Configuration.GetConnectionString("PetControlContext")));
 
 builder.Services.AddApiVersioning(options =>
 {
@@ -29,6 +27,9 @@ builder.Services.AddApiVersioning(options =>
         new UrlSegmentApiVersionReader(),
         new HeaderApiVersionReader("X-Api-Version"));
 });
+
+// Registrar outros serviços
+builder.Services.AddScoped<Repository>();
 
 builder.Services.AddScoped<IAgenda, AgendaService>();
 builder.Services.AddScoped<IPetSupport, PetSupportService>();
