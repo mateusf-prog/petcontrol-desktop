@@ -1,15 +1,11 @@
-using Asp.Versioning;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using PetControlSystem.Components;
-using PetControlSystem.Models;
 using PetControlSystem.Repositories;
+using PetControlSystem.Repositories.Interfaces;
 using PetControlSystem.Services;
 using PetControlSystem.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents()
     .AddInteractiveWebAssemblyComponents();
@@ -18,19 +14,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddApiVersioning(options =>
-{
-    options.DefaultApiVersion = new ApiVersion(1);
-    options.ReportApiVersions = true;
-    options.AssumeDefaultVersionWhenUnspecified = true;
-    options.ApiVersionReader = ApiVersionReader.Combine(
-        new UrlSegmentApiVersionReader(),
-        new HeaderApiVersionReader("X-Api-Version"));
-});
-
-// Registrar outros serviços
-builder.Services.AddScoped<Repository>();
-
+builder.Services.AddScoped<IRepository, Repository>();
 builder.Services.AddScoped<IAgenda, AgendaService>();
 builder.Services.AddScoped<IPetSupport, PetSupportService>();
 builder.Services.AddScoped<IUser, UserService>();
@@ -47,6 +31,11 @@ app.UseSwaggerUI();
 if (app.Environment.IsDevelopment())
 {
     app.UseWebAssemblyDebugging();
+    app.UseSwaggerUI(options =>
+    {
+        options.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
+        options.RoutePrefix = string.Empty;
+    });
 }
 else
 {
@@ -58,6 +47,7 @@ app.UseHttpsRedirection();
 
 app.UseStaticFiles();
 app.UseAntiforgery();
+app.MapControllers();
 
 app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode()
