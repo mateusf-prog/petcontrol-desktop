@@ -1,7 +1,10 @@
-﻿namespace PetControlSystem.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace PetControlSystem.Models
 {
     public class Product
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public long Id { get; private set; }
         public string Name { get; private set; }
         public decimal Price { get; private set; }

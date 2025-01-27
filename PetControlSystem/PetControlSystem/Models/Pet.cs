@@ -1,10 +1,12 @@
-﻿using System.Xml.Linq;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.Xml.Linq;
 using PetControlSystem.Models.Enum;
 
 namespace PetControlSystem.Models
 {
     public class Pet
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public long Id { get; private set; }
         public string? Name { get; private set; }
         public long CustomerId { get; private set; }
