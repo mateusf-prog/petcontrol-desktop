@@ -1,13 +1,25 @@
-﻿using PetControlSystem.Models;
+﻿using PetControlSystem.Dto;
+using PetControlSystem.Mappers;
+using PetControlSystem.Repositories.Interfaces;
 using PetControlSystem.Services.Interfaces;
 
 namespace PetControlSystem.Services
 {
     public class AgendaService : IAgenda
     {
-        public Agenda Create(Agenda obj)
+        private readonly IRepository _repository;
+
+        public AgendaService(IRepository repository)
         {
-            throw new NotImplementedException();
+            _repository = repository;
+        }
+
+        public AgendaDto Create(AgendaDto input)
+        {
+            var agenda = input.ToModel();
+            _repository.Agendas.Add(agenda);
+            _repository.SaveChanges();
+            return input;
         }
 
         public void Delete(string id)
@@ -15,17 +27,12 @@ namespace PetControlSystem.Services
             throw new NotImplementedException();
         }
 
-        public Agenda Read(string id)
+        public AgendaDto Read(string id)
         {
             throw new NotImplementedException();
         }
 
-        public List<Agenda> ReadAll()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Agenda Update(string id, Agenda obj)
+        public List<AgendaDto> ReadAll()
         {
             throw new NotImplementedException();
         }
