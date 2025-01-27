@@ -7,12 +7,6 @@ namespace PetControlSystem.Repositories
     public class Repository : DbContext
     {
         private readonly IConfiguration _configuration;
-
-        public Repository(IConfiguration configuration)
-        {
-            _configuration = configuration;
-        }
-
         public DbSet<Product> Products { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<Customer> Customers { get; set; }
@@ -20,6 +14,11 @@ namespace PetControlSystem.Repositories
         public DbSet<Agenda> Agendas { get; set; }
         public DbSet<PetSupport> Services { get; set; }
         public DbSet<User> Users { get; set; }
+
+        public Repository(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

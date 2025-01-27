@@ -1,12 +1,13 @@
 using Asp.Versioning;
+using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
+using Microsoft.EntityFrameworkCore;
 using PetControlSystem.Components;
-using PetControlSystem.Models;
+using PetControlSystem.Repositories;
 using PetControlSystem.Services;
 using PetControlSystem.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents()
     .AddInteractiveWebAssemblyComponents();
@@ -14,6 +15,10 @@ builder.Services.AddControllers();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+WebAssemblyHostBuilder.CreateDefault(args);
+builder.Services.AddDbContext<Repository>(options =>
+    options.UseNpgsql(builder.Configuration.GetConnectionString("PetControlContext")));
 
 builder.Services.AddApiVersioning(options =>
 {
