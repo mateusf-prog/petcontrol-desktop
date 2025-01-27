@@ -6,7 +6,7 @@ using PetControlSystem.Services.Interfaces;
 namespace PetControlSystem.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/schedules")]
     public class AgendaController : ControllerBase
     {
         private readonly IAgenda _agendaService;
@@ -37,7 +37,8 @@ namespace PetControlSystem.Controllers
         [HttpPost]
         public ActionResult<Agenda> Create(AgendaDto agendaDto)
         {
-            return null;
+            var result = _agendaService.Create(agendaDto);
+            return CreatedAtAction(nameof(GetById), new { id = result.Id}, result);
         }
 
         [HttpDelete("{id}")]

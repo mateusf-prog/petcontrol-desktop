@@ -10,5 +10,14 @@ namespace PetControlSystem.Models
         public long CustomerId { get; private set; }
         public Customer Customer { get; private set; }
         public ICollection<PetSupport> Services = [];
+
+        public Agenda() { }
+
+        public Agenda(DateTime date, Customer customer, ICollection<PetSupport> services)
+        {
+            Date = date;
+            Customer = customer;
+            Services = services;
+        }
     }
 }
