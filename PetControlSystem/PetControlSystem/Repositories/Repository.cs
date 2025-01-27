@@ -1,9 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PetControlSystem.Models;
+using PetControlSystem.Repositories.Interfaces;
 
 namespace PetControlSystem.Repositories
 {
-    public class Repository : DbContext
+    public class Repository : DbContext, IRepository
     {
         private readonly IConfiguration _configuration;
         public DbSet<Product> Products { get; set; }
@@ -27,6 +29,20 @@ namespace PetControlSystem.Repositories
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            // Configurar conversão de DateTime para UTC
+            foreach (var entityType in modelBuilder.Model.GetEntityTypes())
+            {
+                foreach (var property in entityType.GetProperties())
+                {
+                    if (property.ClrType == typeof(DateTime) || property.ClrType == typeof(DateTime?))
+                    {
+                        property.SetValueConverter(new ValueConverter<DateTime, DateTime>(
+                            v => v.Kind == DateTimeKind.Unspecified ? DateTime.SpecifyKind(v, DateTimeKind.Utc) : v.ToUniversalTime(),
+                            v => DateTime.SpecifyKind(v, DateTimeKind.Utc)));
+                    }
+                }
+            }
+
             // One-to-one: User and Address
             modelBuilder.Entity<User>()
                 .HasOne(u => u.Address)
@@ -62,6 +78,11 @@ namespace PetControlSystem.Repositories
                 .HasOne(a => a.Customer)
                 .WithMany(c => c.Appointments)
                 .HasForeignKey(a => a.CustomerId);
+        }
+
+        public override int SaveChanges()
+        {
+            return base.SaveChanges();
         }
     }
 }
