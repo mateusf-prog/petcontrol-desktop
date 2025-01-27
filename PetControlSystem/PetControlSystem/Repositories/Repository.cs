@@ -1,5 +1,4 @@
-﻿using System.Configuration;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using PetControlSystem.Models;
 
 namespace PetControlSystem.Repositories
@@ -28,6 +27,12 @@ namespace PetControlSystem.Repositories
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            // One-to-one: User and Address
+            modelBuilder.Entity<User>()
+                .HasOne(u => u.Address)
+                .WithMany()
+                .HasForeignKey(u => u.AddressId);
+
             // Many-to-many: Order and Product
             modelBuilder.Entity<Order>()
                 .HasMany(o => o.Products)

@@ -1,8 +1,11 @@
-﻿
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
 namespace PetControlSystem.Models
 {
     public class Address
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public long Id { get; private set; }
         public string? ZipCode { get; private set; }
         public string? Street { get; private set; }
         public string? Number { get; private set; }
