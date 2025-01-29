@@ -1,8 +1,0 @@
-﻿using PetControlSystem.Models;
-
-namespace PetControlSystem.Services.Interfaces
-{
-    public interface IProduct : ICrud<Product>
-    {
-    }
-}
