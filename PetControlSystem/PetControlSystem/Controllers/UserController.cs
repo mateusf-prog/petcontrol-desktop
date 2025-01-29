@@ -4,7 +4,7 @@ namespace PetControlSystem.Controllers
 {
     [ApiController]
     [Route("api/users")]
-    public class UserController
+    public class UserController : ControllerBase
     {
     }
 }

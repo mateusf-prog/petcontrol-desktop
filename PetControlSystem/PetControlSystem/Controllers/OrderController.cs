@@ -4,7 +4,7 @@ namespace PetControlSystem.Controllers
 {
     [ApiController]
     [Route("api/orders")]
-    public class OrderController
+    public class OrderController : ControllerBase
     {
     }
 }
