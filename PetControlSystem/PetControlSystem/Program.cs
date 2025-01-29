@@ -15,13 +15,13 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<IRepository, Repository>();
-builder.Services.AddScoped<IAgenda, AgendaService>();
-builder.Services.AddScoped<IPetSupport, PetSupportService>();
-builder.Services.AddScoped<IUser, UserService>();
-builder.Services.AddScoped<IPet, PetService>();
-builder.Services.AddScoped<IProduct, ProductService>();
-builder.Services.AddScoped<IOrder, OrderService>();
-builder.Services.AddScoped<ICustomer, CustomerService>();
+builder.Services.AddScoped<IAgendaService, AgendaService>();
+builder.Services.AddScoped<IPetSupportService, PetSupportService>();
+builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IPetService, PetService>();
+builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<IOrderService, OrderService>();
+builder.Services.AddScoped<ICustomerService, CustomerService>();
 
 var app = builder.Build();
 
