@@ -1,33 +1,61 @@
-﻿using PetControlSystem.Models;
+﻿using FluentResults;
+using PetControlSystem.Dto;
+using PetControlSystem.Mappers;
+using PetControlSystem.Repositories.Interfaces;
 using PetControlSystem.Services.Interfaces;
 
 namespace PetControlSystem.Services
 {
-    public class ProductService : IProduct
+    public class ProductService : IProductService
     {
-        public Product Create(Product obj)
+        private readonly IRepository _repository;
+
+        public ProductService(IRepository repository)
         {
-            throw new NotImplementedException();
+            _repository = repository;
         }
 
-        public void Delete(string id)
+        public Result<string> Delete(long id)
         {
-            throw new NotImplementedException();
+            var existingProduct = _repository.Products.FirstOrDefault(p => p.Id.Equals(id));
+            if (existingProduct == null)
+                return Result.Fail($"Product not found. ID: {id}");
+
+            _repository.Products.Remove(existingProduct!);
+            _repository.SaveChanges();
+
+            return Result.Ok();
         }
 
-        public Product Read(string id)
+        public Result<ProductDto> Read(long id)
         {
-            throw new NotImplementedException();
+            var existingProduct = _repository.Products.FirstOrDefault(p => p.Id.Equals(id));
+            if (existingProduct == null)
+                return Result.Fail<ProductDto>($"Product not found. ID: {id}");
+
+            var result = existingProduct.ToDto();
+
+            return Result.Ok(result);
         }
 
-        public List<Product> ReadAll()
+        public Result<List<ProductDto>> ReadAll()
         {
-            throw new NotImplementedException();
+            var products = _repository.Products.Select(p => p.ToDto()).ToList();
+            return Result.Ok(products);
         }
 
-        public Product Update(string id, Product obj)
+        public Result<ProductDto> Create(ProductDto input)
         {
-            throw new NotImplementedException();
+            var existingProduct = _repository.Products.FirstOrDefault(p => p.Name == input.Name);
+            if (existingProduct != null)
+                return Result.Fail<ProductDto>("Product already exists with the same name");
+
+            var product = input.ToModel();
+            _repository.Products.Add(product);
+            _repository.SaveChanges();
+
+            var result = product.ToDto();
+            return Result.Ok(result);
         }
     }
 }

@@ -10,7 +10,7 @@ namespace PetControlSystem.Models
         public decimal Price { get; private set; }
         public string Description { get; private set; }
         public int Stock { get; private set; }
-        public ICollection<Order> Orders { get; set; }
+        public ICollection<Order>? Orders { get; set; }
 
         public Product(string name, decimal price, string description, int stock)
         {
