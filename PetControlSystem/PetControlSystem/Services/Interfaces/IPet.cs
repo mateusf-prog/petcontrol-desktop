@@ -1,8 +1,7 @@
-﻿using PetControlSystem.Models;
-
+﻿
 namespace PetControlSystem.Services.Interfaces
 {
-    public interface IPet : ICrud<Pet>
+    public interface IPet
     {
     }
 }
