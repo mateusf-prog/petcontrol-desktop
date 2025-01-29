@@ -1,7 +1,7 @@
 ﻿
 namespace PetControlSystem.Services.Interfaces
 {
-    public interface IPet
+    public interface IUserService
     {
     }
 }

@@ -2,7 +2,7 @@
 
 namespace PetControlSystem.Services
 {
-    public class PetSupportService : IPetSupport
+    public class PetSupportService : IPetSupportService
     {
     }
 }

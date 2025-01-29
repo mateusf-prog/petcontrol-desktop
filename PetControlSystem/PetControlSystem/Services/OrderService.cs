@@ -3,7 +3,7 @@ using PetControlSystem.Services.Interfaces;
 
 namespace PetControlSystem.Services
 {
-    public class OrderService : IOrder
+    public class OrderService : IOrderService
     {
     }
 }
