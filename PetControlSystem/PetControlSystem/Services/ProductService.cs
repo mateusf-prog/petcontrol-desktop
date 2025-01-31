@@ -1,4 +1,5 @@
 ﻿using FluentResults;
+using Microsoft.EntityFrameworkCore;
 using PetControlSystem.Dto;
 using PetControlSystem.Mappers;
 using PetControlSystem.Repositories.Interfaces;
@@ -6,14 +7,9 @@ using PetControlSystem.Services.Interfaces;
 
 namespace PetControlSystem.Services
 {
-    public class ProductService : IProductService
+    public class ProductService(IRepository repository) : IProductService
     {
-        private readonly IRepository _repository;
-
-        public ProductService(IRepository repository)
-        {
-            _repository = repository;
-        }
+        private readonly IRepository _repository = repository;
 
         public Result<string> Delete(long id)
         {
@@ -44,14 +40,14 @@ namespace PetControlSystem.Services
             return Result.Ok(products);
         }
 
-        public Result<ProductDto> Create(ProductDto input)
+        public async Task<Result<ProductDto>> Create(ProductDto input)
         {
-            var existingProduct = _repository.Products.FirstOrDefault(p => p.Name == input.Name);
+            var existingProduct = await _repository.Products.FirstOrDefaultAsync(p => p.Name == input.Name);
             if (existingProduct != null)
                 return Result.Fail<ProductDto>("Product already exists with the same name");
 
             var product = input.ToModel();
-            _repository.Products.Add(product);
+            await _repository.Products.AddAsync(product);
             _repository.SaveChanges();
 
             var result = product.ToDto();

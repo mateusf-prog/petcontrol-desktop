@@ -16,9 +16,9 @@ namespace PetControlSystem.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create([FromBody] ProductDto input)
+        public async Task<IActionResult> Create([FromBody] ProductDto input)
         {
-            var result = _productService.Create(input);
+            var result = await _productService.Create(input);
 
             if (result.IsFailed) return BadRequest(result.Errors);
 

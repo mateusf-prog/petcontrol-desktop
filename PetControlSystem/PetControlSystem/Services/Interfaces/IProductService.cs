@@ -5,7 +5,7 @@ namespace PetControlSystem.Services.Interfaces
 {
     public interface IProductService
     {
-        Result<ProductDto> Create(ProductDto input);
+        Task<Result<ProductDto>> Create(ProductDto input);
         Result<string> Delete(long id);
         Result<ProductDto> Read(long id);
         Result<List<ProductDto>> ReadAll();

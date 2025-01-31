@@ -1,5 +1,4 @@
-﻿using PetControlSystem.Models;
-
+﻿
 namespace PetControlSystem.Dto
 {
     public record ProductDto(
