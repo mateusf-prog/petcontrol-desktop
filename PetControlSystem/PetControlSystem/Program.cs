@@ -1,4 +1,3 @@
-using PetControlSystem.Components;
 using PetControlSystem.Repositories;
 using PetControlSystem.Repositories.Interfaces;
 using PetControlSystem.Services;
@@ -48,10 +47,5 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseAntiforgery();
 app.MapControllers();
-
-app.MapRazorComponents<App>()
-    .AddInteractiveServerRenderMode()
-    .AddInteractiveWebAssemblyRenderMode()
-    .AddAdditionalAssemblies(typeof(PetControlSystem.Client._Imports).Assembly);
 
 app.Run();
